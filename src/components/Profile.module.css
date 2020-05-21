@@ -1,0 +1,7 @@
+.content {
+  background-color: khaki;
+  grid-area: c;
+}
+.item {
+  color: greenyellow;
+}
