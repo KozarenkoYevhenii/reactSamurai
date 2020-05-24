@@ -3,5 +3,12 @@
   background-color: greenYellow;
 }
 .item {
+  padding: 20px;
+}
+.item a{
   color: white;
+  text-decoration: none;
+}
+.item a.active {
+  color: darkgreen;
 }

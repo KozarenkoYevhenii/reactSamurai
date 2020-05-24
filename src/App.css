@@ -9,18 +9,7 @@
   width: 100vw;
 }
 
-.header {
-  grid-area: h;
-  background-color: green;
-}
-.header img {
-  width: 30px;
-}
-.nav {
-  grid-area: n;
-  background-color: greenyellow;
-}
-.content {
+.app-wrapper-content {
   background-color: khaki;
   grid-area: c;
 }
