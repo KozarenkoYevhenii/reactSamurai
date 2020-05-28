@@ -1,0 +1,6 @@
+.dialogItem {
+    padding: 10px 20px;
+}
+.active {
+    color: darkgoldenrod;
+}
