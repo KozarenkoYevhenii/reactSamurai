@@ -12,3 +12,14 @@
 .item a.active {
   color: darkgreen;
 }
+.friends {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.header {
+  color: white;
+  font-size: 30px;
+  justify-self: center;
+  grid-column: 1/4;
+  padding: 20px;
+}

@@ -3,10 +3,7 @@ import s from "./MyPosts.module.css";
 import Post from './Post/Post';
 
 const MyPosts = (props) => {
-
-    let messages = props.messages
-
-    let messagesElement = messages.map(m => <Post message={m.message} likes={m.likes}/>)
+    let messagesElement = props.messages.map(m => <Post message={m.message} likes={m.likes}/>)
 
     return (
         <div className={s.posts}>
