@@ -6,3 +6,7 @@
     display: grid;
     grid-auto-rows: min-content;
 }
+.messageArea {
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
