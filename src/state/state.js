@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from '../rerender'
+
 let state = {
     dialogsPage: {
         dialogs: [
@@ -32,10 +34,11 @@ let state = {
 export let addPost = (postMessage) => {
     let newPost = {
         id: '4',
-        message: {postMessage},
+        message: postMessage,
         likes: '0'
     }
-    state.profilePage.postMessages.push(newPost)
+    state.profilePage.postMessages.push(newPost)    
+    rerenderEntireTree(state)
 }
 
 export default state
