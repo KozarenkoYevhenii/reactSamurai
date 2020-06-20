@@ -1,8 +1,8 @@
 import React from 'react';
 import s from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import { updateNewMessageTextCreateAction, addMessageCreateAction } from '../../redux/dialogs-reducer';
 
 
 const Dialogs = (props) => {
@@ -10,8 +10,11 @@ const Dialogs = (props) => {
     let messagesElement = props.state.dialogMessages.map(m => <Message id={m.id} message={m.message}/>)
     let newMessageRef = React.createRef();
     let addMessage = () => {
-        let newMessage = newMessageRef.current.value;
-        alert(newMessage);
+        props.dispatch(addMessageCreateAction())
+    }
+    let onChangeMessage = () => {
+        let text = newMessageRef.current.value
+        props.dispatch(updateNewMessageTextCreateAction(text))
     }
 
     return (
@@ -24,7 +27,7 @@ const Dialogs = (props) => {
             </div>
             <div className={s.messageArea}>
                 <div>
-                    <textarea ref={newMessageRef}></textarea>
+                    <textarea placeholder='Enter Message' onChange={onChangeMessage} ref={newMessageRef} value={props.newMessageText}></textarea>
                 </div>
                 <div>
                     <button onClick={addMessage}>Send Message</button>
