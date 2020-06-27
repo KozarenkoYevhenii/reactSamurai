@@ -3,7 +3,7 @@ import s from './Message.module.css'
 
 
 const Message = (props) => {
-    if (props.id == 1) {
+    if (props.id === 1) {
         return (
             <div className={`${s.message} ${s.id_1}`}>
                 {props.message}
