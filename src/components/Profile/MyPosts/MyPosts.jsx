@@ -3,11 +3,12 @@ import s from "./MyPosts.module.css";
 import Post from './Post/Post';
 
 const MyPosts = (props) => {
-    let postElement = props.posts.map(m => <Post message={m.message} likes={m.likes} />)
+    let postElement = props.posts.postMessages.map(m => <Post message={m.message} likes={m.likes}/>)
     let newPostElement = React.createRef();
     let onAddPost = () => {
         props.addPost()
     }
+ 
     let onPostChange = () => {
         let text = newPostElement.current.value
         props.updateNewPostText(text)

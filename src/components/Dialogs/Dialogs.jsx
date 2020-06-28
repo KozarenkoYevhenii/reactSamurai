@@ -7,13 +7,16 @@ const Dialogs = (props) => {
     let dialogsElement = props.dialogs.map(d => <DialogItem id={d.id} name={d.name}/>)
     let messagesElement = props.dialogMessages.map(m => <Message id={m.id} message={m.message}/>)
     let newMessageRef = React.createRef();
+    
     let onAddMessage = () => {
         props.addMessage()
     }
+    debugger
     let onChangeMessage = () => {
         let text = newMessageRef.current.value
         props.changeMessage(text)
     }
+    debugger
 
     return (
         <div className={s.dialogsWindow}>
