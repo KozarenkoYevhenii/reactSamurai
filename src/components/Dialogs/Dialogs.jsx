@@ -11,12 +11,12 @@ const Dialogs = (props) => {
     let onAddMessage = () => {
         props.addMessage()
     }
-    debugger
+   
     let onChangeMessage = () => {
         let text = newMessageRef.current.value
         props.changeMessage(text)
     }
-    debugger
+ 
 
     return (
         <div className={s.dialogsWindow}>
