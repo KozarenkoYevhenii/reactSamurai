@@ -1,49 +1,29 @@
 import React from "react";
 import s from "./Users.module.css";
-import axios from "axios";
 import userIcon from "../../assets/img/user-icon.jpg";
+import Preloader from "../common/preloader/Preloader";
 
-class Users extends React.Component {
-  componentDidMount() {
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`
-      )
-      .then((res) => {
-        this.props.setUsers(res.data.items);
-        this.props.setTotalUsersCount(res.data.totalCount);
-      });
-  }
-  onPageChange = (page) => {
-    this.props.setCurrentPage(page)
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${page}`
-      )
-      .then((res) => {
-        this.props.setUsers(res.data.items);
-        console.log(res);
-      });
-  }
-  render() {
+const Users = (props) => {
+
     const pagesCount = Math.ceil(
-      this.props.totalUsersCount / this.props.pageSize
+      props.totalUsersCount / props.pageSize
     );
     const pages = [];
     for (let i = 1; i <= pagesCount; i++) {
       pages.push(i);
-    }
+  }
     return (
       <div>
+        {props.isFatching ? <Preloader /> : "" }
         {pages.map((page) => (
           <span
-            className={page === this.props.currentPage ? s.selectedPage : ""}
-            onClick={() => this.onPageChange(page)}
+            className={page === props.currentPage ? s.selectedPage : ""}
+            onClick={() => props.onPageChange(page)}
           >
             {page}
           </span>
         ))}
-        {this.props.users.map((u) => (
+        {props.users.map((u) => (
           <div key={u.id}>
             <div>
               <img
@@ -54,13 +34,13 @@ class Users extends React.Component {
             </div>
             <div>
               {u.followed ? (
-                <button onClick={() => this.props.unfollow(u.id)}>
+                <button onClick={() => props.unfollow(u.id)}>
                   Unfollow
                 </button>
               ) : (
                 <button
                   onClick={() => {
-                    this.props.follow(u.id);
+                    props.follow(u.id);
                   }}
                 >
                   Follow
@@ -77,7 +57,7 @@ class Users extends React.Component {
         ))}
       </div>
     );
-  }
+  
 }
 
 export default Users;
