@@ -29,7 +29,10 @@ class UsersAPIContainer extends React.Component {
     this.props.setCurrentPage(page);
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${page}`
+        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${page}`,
+        {
+          withCredentials: true,
+        }
       )
       .then((res) => {
         this.props.toggleIsFatching(false);
