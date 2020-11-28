@@ -4,40 +4,16 @@ import Users from "./Users";
 import {
   follow,
   unfollow,
-  setUsers,
-  setCurrentPage,
-  setTotalUsersCount,
-  toggleIsFatching,
+  toggleFollowingProgress,
+  getUsers,
 } from "../../redux/users-reducer";
-import axios from "axios";
 
-class UsersAPIContainer extends React.Component {
+class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.toggleIsFatching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`
-      )
-      .then((res) => {
-        this.props.toggleIsFatching(false);
-        this.props.setUsers(res.data.items);
-        this.props.setTotalUsersCount(res.data.totalCount);
-      });
+    this.props.getUsers(this.props.pageSize, this.props.currentPage);
   }
   onPageChange = (page) => {
-    this.props.toggleIsFatching(true);
-    this.props.setCurrentPage(page);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${page}`,
-        {
-          withCredentials: true,
-        }
-      )
-      .then((res) => {
-        this.props.toggleIsFatching(false);
-        this.props.setUsers(res.data.items);
-      });
+    this.props.getUsers(this.props.pageSize, page);
   };
 
   render() {
@@ -50,7 +26,8 @@ class UsersAPIContainer extends React.Component {
         users={this.props.users}
         unfollow={this.props.unfollow}
         follow={this.props.follow}
-        isFatching={this.props.isFatching}
+        isFetching={this.props.isFetching}
+        followingInProgress={this.props.followingInProgress}
       />
     );
   }
@@ -62,15 +39,14 @@ let mapStateToProps = (state) => {
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
-    isFatching: state.usersPage.isFatching,
+    isFetching: state.usersPage.isFetching,
+    followingInProgress: state.usersPage.followingInProgress,
   };
 };
 
 export default connect(mapStateToProps, {
   follow,
   unfollow,
-  setUsers,
-  setCurrentPage,
-  setTotalUsersCount,
-  toggleIsFatching,
-})(UsersAPIContainer);
+  toggleFollowingProgress,
+  getUsers,
+})(UsersContainer);
